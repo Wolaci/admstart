@@ -16,3 +16,4 @@
 <script src="assets/js/jquery.mask.min.js"></script>
 
 <?php require_once('templateLateral.php') ?>
+<?php require_once('templateCabecalho.php') ?>
