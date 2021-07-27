@@ -1,11 +1,53 @@
-<?php require_once('templates/templateChamada.php'); ?>
-<div class="content-wrapper">
-<section class="content">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AdminLTE 3 | General Form Elements</title>
+  <?php require_once('templates/templateChamada.php') ?>
+</head>
+  <!-- Navbar -->
+  <?php require_once('templates/templateLateral.php') ?>
+  <?php require_once('templates/templateCabecalho.php') ?>
+  <!-- /.navbar -->
+
+  <!-- Main Sidebar Container -->
+  
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>General Form</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active">General Form</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
       <div class="container-fluid">
         <div class="row">
           <!-- left column -->
-          <div class="col-md-12">
-<div class="card card-secondary">
+
+          <!--/.col (left) -->
+          <!-- right column -->
+          <div class="col-md-6">
+                <div id="jsGrid1"></div>
+          </div>
+
+          <div class="col-md-6">
+            <!-- general form elements -->
+            <div class="card card-primary">
               <div class="card-header">
                 <h3 class="card-title">Quick Example</h3>
               </div>
@@ -45,7 +87,35 @@
                 </div>
               </form>
             </div>
-            </div>
-            </div>
-</section>
-</div>
+          </div>
+          <!--/.col (right) -->
+        </div>
+        <!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+  <!-- /.control-sidebar -->
+  <script>
+  $(function () {
+    $("#jsGrid1").jsGrid({
+        height: "100%",
+        width: "100%",
+
+        sorting: true,
+        paging: true,
+
+        data: db.clients,
+
+        fields: [
+            { name: "Name", type: "text", width: 150 },
+            { name: "Age", type: "number", width: 50 },
+            { name: "Address", type: "text", width: 200 },
+            { name: "Country", type: "select", items: db.countries, valueField: "Id", textField: "Name" },
+        ]
+    });
+  });
+</script>
+<?php require_once('templates/templateRodape.php') ?>
+</html>
