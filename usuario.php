@@ -83,7 +83,7 @@
                 <!-- /.card-body -->
 
                 <div class="card-footer">
-                  <button type="button" onclick="dados('usuario')" class="btn btn-primary">Enviar</button>
+                  <button type="button" onclick="dados('usuario','inserir')" class="btn btn-primary">Enviar</button>
                 </div>
               </form>
             </div>
@@ -99,21 +99,22 @@
   <!-- /.control-sidebar -->
   <script>
   dados();
-  function dados(form = null){
+  function dados(form = null, param = null){
 
     let data = (form!=null) ? $('form[name='+form+']').serialize() : '';
+    let opcao = (param!=null) ? param : '';
 
     $.ajax({
 				url:'usuarioDados.php', //Server script to process data
 				type: 'POST',
-				data: data,
+				data: data+'&opcao='+opcao,
         dataType: "json",
 				success : function (result){
-          alert('aaaa');
+          alert(result.nome);
         }
     });
   }  
-  
+
   $(function () {
     $("#jsGrid1").jsGrid({
         height: "100%",
