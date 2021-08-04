@@ -14,15 +14,8 @@ switch ($opcao) {
     $sql = $conn->prepare("SELECT * FROM usuarios WHERE status = 'SIM'");
     $sql->execute();
     $dados = $sql->fetchAll(PDO::FETCH_OBJ);
-    // foreach($dados as $key => $rs){
-  
-    //   $arrDados = [
-    //     "nome" => $rs->nome,
-    //     "email" => $rs->email,
-    //     "status" => $rs->status
-    //   ];
-    // }
-    echo json_encode($dados);
+    $result = json_encode(array('status' => true, 'dados' =>$dados,'mensagem'=>"dados"));
+    
     break;
     
   case 'inserir':
@@ -31,5 +24,5 @@ switch ($opcao) {
     $sql->execute([$nome,$email,$senha,'SIM']);
     break; 
 }
-
+echo $result;
 ?>

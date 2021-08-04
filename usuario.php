@@ -110,12 +110,14 @@
 				data: data+'&opcao='+opcao,
         dataType: "json",
 				success : function (result){
-          alert(result.nome);
+          if(result.status){
+            grid(result.dados)
+          }
         }
     });
   }  
 
-  $(function () {
+  function grid(dados){
     $("#jsGrid1").jsGrid({
         height: "100%",
         width: "100%",
@@ -123,15 +125,16 @@
         sorting: true,
         paging: true,
 
-        data: db.clients,
+        data: dados,
 
         fields: [
-            { name: "Nome", type: "text", width: 150 },
-            { name: "Age", type: "number", width: 50 },
-            { name: "Address", type: "text", width: 200 },
+            { name: "nome", value:"Nome", type: "text", width: 150 },
+            { name: "email", type: "text", width: 150 },
+            { name: "status", type: "text", width: 50 },
         ]
     });
-  });
+  }
+  
 </script>
 <?php require_once('templates/templateRodape.php') ?>
 </html>
