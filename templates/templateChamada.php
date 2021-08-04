@@ -16,5 +16,5 @@
 <script src="assets/js/adminlte.min.js"></script>
 <!-- jQuery Mask-->
 <script src="assets/js/jquery.mask.min.js"></script>
-<script src="assets/js/db.js"></script>
+<!-- <script src="assets/js/db.js"></script> -->
 <script src="assets/js/jsgrid.min.js"></script>

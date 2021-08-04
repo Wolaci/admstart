@@ -128,8 +128,8 @@
         data: dados,
 
         fields: [
-            { name: "nome", value:"Nome", type: "text", width: 150 },
-            { name: "email", type: "text", width: 150 },
+            { name: "Nome", type: "text", width: 150 },
+            { name: "E-mail", type: "text", width: 150 },
             { name: "status", type: "text", width: 50 },
         ]
     });
