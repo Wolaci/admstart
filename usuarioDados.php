@@ -11,7 +11,7 @@ $rs = '';
 switch ($opcao) {
   case '':
     
-    $sql = $conn->prepare("SELECT nome AS Nome, email as 'E-mail', status FROM usuarios WHERE status = 'SIM'");
+    $sql = $conn->prepare("SELECT * FROM usuarios WHERE status = 'SIM'");
     $sql->execute();
     $dados = $sql->fetchAll(PDO::FETCH_OBJ);
     $result = json_encode(array('status' => true, 'dados' =>$dados,'mensagem'=>"dados"));

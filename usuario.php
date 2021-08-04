@@ -121,18 +121,30 @@
     $("#jsGrid1").jsGrid({
         height: "100%",
         width: "100%",
-
         sorting: true,
         paging: true,
-
+        rowClick: function(args) {
+            preencheCampos(args.item);
+        },
+        
         data: dados,
 
         fields: [
-            { name: "Nome", type: "text", width: 150 },
-            { name: "E-mail", type: "text", width: 150 },
-            { name: "status", type: "text", width: 50 },
+            { name: "nome", title: "Nome", type: "text", width: 100 },
+            { name: "email", title: "E-mail", type: "text", width: 150 },
+            { name: "status", title:"Status", type: "text", width: 50 },
+            { type: "control", editButton: false, modeSwitchButton: false }
         ]
     });
+  }
+
+  function preencheCampos(dados){
+    for (let key in dados) {
+      $("#"+key).val(dados[key]);
+      // document.querySelector("[name='txtstart']").value = date_today;
+      // console.log(key);
+      // console.log(dados[key])
+    }
   }
   
 </script>
