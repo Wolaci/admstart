@@ -111,7 +111,7 @@
         dataType: "json",
 				success : function (result){
           if(result.status){
-            grid(result.dados)
+            grid(result.dados);
           }
         }
     });
@@ -123,8 +123,13 @@
         width: "100%",
         sorting: true,
         paging: true,
+        confirmDeleting: true,
+        deleteConfirm: "Você tem certeza disso?",
         rowClick: function(args) {
             preencheCampos(args.item);
+        },
+        onItemDeleting: function(args) {
+          deletaItem(args.item);
         },
         
         data: dados,
@@ -132,8 +137,8 @@
         fields: [
             { name: "nome", title: "Nome", type: "text", width: 100 },
             { name: "email", title: "E-mail", type: "text", width: 150 },
-            { name: "status", title:"Status", type: "text", width: 50 },
-            { type: "control", editButton: false, modeSwitchButton: false }
+            { name: "status", title:"Status", type: "text", width: 40 },
+            { type: "control", editButton: false, modeSwitchButton: false, width: 30 },
         ]
     });
   }
@@ -145,6 +150,24 @@
       // console.log(key);
       // console.log(dados[key])
     }
+  }
+
+  function deletaItem(dado){
+
+    let data = {'id':dado.id, 'opcao':'deletar'};
+    
+    $.ajax({
+				url:'usuarioDados.php', //Server script to process data
+				type: 'POST',
+				data: data,
+        dataType: "json",
+				success : function (result){
+          if(result.status){
+            grid(result.dados);
+          }
+        }
+    });
+
   }
   
 </script>

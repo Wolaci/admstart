@@ -6,23 +6,32 @@ $nome = !empty($_POST['nome']) ? $_POST['nome'] : '' ;
 $email = !empty($_POST['email']) ? $_POST['email'] : '' ;
 $senha = !empty($_POST['senha']) ? base64_encode($_POST['senha']) : '';
 $opcao = !empty($_POST['opcao']) ? $_POST['opcao'] : '' ;
-$rs = '';
-// var_dump($_POST['opcao']); 
+$result = '';
+
 switch ($opcao) {
   case '':
     
-    $sql = $conn->prepare("SELECT * FROM usuarios WHERE status = 'SIM'");
-    $sql->execute();
-    $dados = $sql->fetchAll(PDO::FETCH_OBJ);
+    $query = $conn->prepare("SELECT * FROM usuarios WHERE status = 'SIM'");
+    $query->execute();
+    $dados = $query->fetchAll(PDO::FETCH_OBJ);
     $result = json_encode(array('status' => true, 'dados' =>$dados,'mensagem'=>"dados"));
     
     break;
     
   case 'inserir':
     
-    $sql = $conn->prepare("INSERT INTO usuarios (nome , email, senha, status) VALUES (?, ?, ?, ?)");
-    $sql->execute([$nome,$email,$senha,'SIM']);
+    $insert = $conn->prepare("INSERT INTO usuarios (nome , email, senha, status) VALUES (?, ?, ?, ?)");
+    $insert->execute([$nome,$email,$senha,'SIM']);
+    $result = json_encode(array('status' => true, 'dados' =>$dados,'mensagem'=>"Dados cadastrados com sucesso!"));
+
     break; 
+
+  case 'deletar':
+
+    $apagar = $conn->prepare("DELETE FROM usuarios WHERE id = ?");
+    $apagar->execute([$_POST['id']]);
+    $result = json_encode(array('status' => true, 'dados' =>$dados,'mensagem'=>"Usuário deletado com sucesso!"));
+    break;
 }
 echo $result;
 ?>
