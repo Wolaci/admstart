@@ -83,7 +83,7 @@
                 <!-- /.card-body -->
 
                 <div class="card-footer">
-                  <button type="button" onclick="dados('usuario','inserir')" class="btn btn-primary">Enviar</button>
+                  <button type="button" onclick="inserir('usuario','inserir')" class="btn btn-primary">Enviar</button>
                 </div>
               </form>
             </div>
@@ -99,7 +99,21 @@
   <!-- /.control-sidebar -->
   <script>
   dados();
-  function dados(form = null, param = null){
+  function dados(){
+
+    $.ajax({
+				url:'usuarioDados.php', //Server script to process data
+				type: 'POST',
+        dataType: "json",
+				success : function (result){
+          if(result.status){
+            grid(result.dados);
+          }
+        }
+    });
+  }  
+
+  function inserir(form, param){
 
     let data = (form!=null) ? $('form[name='+form+']').serialize() : '';
     let opcao = (param!=null) ? param : '';
@@ -111,7 +125,8 @@
         dataType: "json",
 				success : function (result){
           if(result.status){
-            grid(result.dados);
+            alert(result.mensagem);
+            dados();
           }
         }
     });

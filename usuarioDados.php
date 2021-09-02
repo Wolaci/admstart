@@ -22,7 +22,7 @@ switch ($opcao) {
     
     $insert = $conn->prepare("INSERT INTO usuarios (nome , email, senha, status) VALUES (?, ?, ?, ?)");
     $insert->execute([$nome,$email,$senha,'SIM']);
-    $result = json_encode(array('status' => true, 'dados' =>$dados,'mensagem'=>"Dados cadastrados com sucesso!"));
+    $result = json_encode(array('status' => true,'mensagem'=>"Dados cadastrados com sucesso!"));
 
     break; 
 
