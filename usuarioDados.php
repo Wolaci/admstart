@@ -7,7 +7,7 @@ $email = !empty($_POST['email']) ? $_POST['email'] : '' ;
 $senha = !empty($_POST['senha']) ? base64_encode($_POST['senha']) : '';
 $opcao = !empty($_POST['opcao']) ? $_POST['opcao'] : '' ;
 $result = '';
-
+die($_POST);
 switch ($opcao) {
   case '':
     
@@ -25,6 +25,11 @@ switch ($opcao) {
     $result = json_encode(array('status' => true,'mensagem'=>"Dados cadastrados com sucesso!"));
 
     break; 
+
+  case 'editar':
+    $editar = $conn->prepare("UPDATE usuarios SET nome=?, email=?, senha=? WHERE id =?");
+    $editar->execute([$nome,$email,$senha,$id]);
+    break;
 
   case 'deletar':
 

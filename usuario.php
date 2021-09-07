@@ -55,6 +55,7 @@
               <!-- form start -->
               <form name="usuario" id="usuario">
                 <div class="card-body">
+                <input type="text" style="display:none" class="form-control" name="id" id="id">
                   <div class="form-group">
                     <label for="exampleInputEmail1">Nome</label>
                     <input type="text" class="form-control" name="nome" id="nome">
@@ -71,7 +72,8 @@
                 <!-- /.card-body -->
 
                 <div class="card-footer">
-                  <button type="button" onclick="inserir('usuario','inserir')" class="btn btn-primary">Enviar</button>
+                  <button type="button" id="insert" onclick="inserir('usuario','inserir')" class="btn btn-primary">Enviar</button>
+                  <button type="button" id="editar" style="display:none" onclick="inserir('usuario','editar')" class="btn btn-primary">Enviar</button>
                 </div>
               </form>
             </div>
@@ -105,7 +107,6 @@
 
     let data = (form!=null) ? $('form[name='+form+']').serialize() : '';
     let opcao = (param!=null) ? param : '';
-
     $.ajax({
 				url:'usuarioDados.php', //Server script to process data
 				type: 'POST',
@@ -130,7 +131,8 @@
         confirmDeleting: true,
         deleteConfirm: "Você tem certeza disso?",
         rowClick: function(args) {
-            preencheCampos(args.item);
+          $("#insert").css('display','none');
+          preencheCampos(args.item);
         },
         onItemDeleting: function(args) {
           deletaItem(args.item);
@@ -148,6 +150,7 @@
   }
 
   function preencheCampos(dados){
+    $("#editar").css('display','block');
     for (let key in dados) {
       if(key!='senha'){
         $("#"+key).val(dados[key]);
