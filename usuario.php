@@ -53,7 +53,7 @@
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form name="usuario">
+              <form name="usuario" id="usuario">
                 <div class="card-body">
                   <div class="form-group">
                     <label for="exampleInputEmail1">Nome</label>
@@ -114,6 +114,7 @@
 				success : function (result){
           if(result.status){
             alert(result.mensagem);
+            $('#usuario').trigger("reset");
             dados();
           }
         }
