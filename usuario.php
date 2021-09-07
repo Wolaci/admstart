@@ -67,18 +67,6 @@
                     <label for="exampleInputPassword1">Senha</label>
                     <input type="password" class="form-control" id="senha" name="senha">
                   </div>
-                  <!-- <div class="form-group">
-                    <label for="exampleInputFile">File input</label>
-                    <div class="input-group">
-                      <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="exampleInputFile">
-                        <label class="custom-file-label" for="exampleInputFile">Choose file</label>
-                      </div>
-                      <div class="input-group-append">
-                        <span class="input-group-text">Upload</span>
-                      </div>
-                    </div>
-                  </div> -->
                 </div>
                 <!-- /.card-body -->
 
@@ -160,10 +148,9 @@
 
   function preencheCampos(dados){
     for (let key in dados) {
-      $("#"+key).val(dados[key]);
-      // document.querySelector("[name='txtstart']").value = date_today;
-      // console.log(key);
-      // console.log(dados[key])
+      if(key!='senha'){
+        $("#"+key).val(dados[key]);
+      }
     }
   }
 
