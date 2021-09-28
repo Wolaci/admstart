@@ -7,7 +7,6 @@ $email = !empty($_POST['email']) ? $_POST['email'] : '' ;
 $senha = !empty($_POST['senha']) ? base64_encode($_POST['senha']) : '';
 $opcao = !empty($_POST['opcao']) ? $_POST['opcao'] : '' ;
 $result = '';
-die($_POST);
 switch ($opcao) {
   case '':
     
@@ -28,14 +27,15 @@ switch ($opcao) {
 
   case 'editar':
     $editar = $conn->prepare("UPDATE usuarios SET nome=?, email=?, senha=? WHERE id =?");
-    $editar->execute([$nome,$email,$senha,$id]);
+    $editar->execute([$nome,$email,$senha,$_POST['id']]);
+    $result = json_encode(array('status' => true,'mensagem'=>"Usuário editado com sucesso!"));
     break;
 
   case 'deletar':
 
     $apagar = $conn->prepare("DELETE FROM usuarios WHERE id = ?");
     $apagar->execute([$_POST['id']]);
-    $result = json_encode(array('status' => true, 'dados' =>$dados,'mensagem'=>"Usuário deletado com sucesso!"));
+    $result = json_encode(array('status' => true,'mensagem'=>"Usuário deletado com sucesso!"));
     break;
 }
 echo $result;
